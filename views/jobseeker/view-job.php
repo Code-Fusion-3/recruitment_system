@@ -29,6 +29,8 @@ $stmt->bindParam(":job_id", $job_id);
 $stmt->bindParam(":user_id", $_SESSION['user_id']);
 $stmt->execute();
 $existing_application = $stmt->fetch(PDO::FETCH_ASSOC);
+include_once '../templates/header.php';
+
 ?>
 
 <!DOCTYPE html>

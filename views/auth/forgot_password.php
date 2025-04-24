@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Smart Recruitment System</title>
+    <title>Forgot Password - Smart Recruitment System</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-center justify-center">
         <div class="bg-white p-8 rounded-lg shadow-md w-96">
-            <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center">Forgot Password</h2>
             
             <?php
             session_start();
@@ -28,7 +28,9 @@
             }
             ?>
 
-            <form action="../../includes/auth/login_process.php" method="POST">
+            <p class="mb-4 text-gray-600">Enter your email address and we'll help you reset your password.</p>
+            
+            <form action="../../includes/auth/forgot_password_process.php" method="POST">
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                         Email
@@ -39,28 +41,15 @@
                            name="email" 
                            required>
                 </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                        Password
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
-                           id="password" 
-                           type="password" 
-                           name="password" 
-                           required>
-                </div>
                 <div class="flex items-center justify-between">
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" 
                             type="submit">
-                        Sign In
+                        Reset Password
                     </button>
                 </div>
             </form>
             <div class="text-center mt-4">
-                <a href="register.php" class="text-blue-500 hover:text-blue-700">Don't have an account? Register</a>
-            </div>
-            <div class="text-center mt-2">
-                <a href="forgot_password.php" class="text-blue-500 hover:text-blue-700">Forgot your password?</a>
+                <a href="login.php" class="text-blue-500 hover:text-blue-700">Back to Login</a>
             </div>
         </div>
     </div>

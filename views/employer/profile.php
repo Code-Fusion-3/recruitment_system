@@ -1,18 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Profile - Smart Recruitment System</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
+<?php 
+// error roporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+session_start();
+require_once '../../config/database.php';
+$database = new Database();
+$db = $database->getConnection();
+include_once '../templates/header.php';
+?>
     <div class="min-h-screen p-6">
         <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
             <h2 class="text-2xl font-bold mb-6">Company Profile</h2>
             
             <?php
-            session_start();
+         
             if (isset($_SESSION['error'])) {
                 echo '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
                         <span class="block sm:inline">' . $_SESSION['error'] . '</span>

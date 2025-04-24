@@ -20,6 +20,8 @@ $stmt = $db->prepare($query);
 $stmt->bindParam(":user_id", $user_id);
 $stmt->execute();
 $profile = $stmt->fetch(PDO::FETCH_ASSOC);
+include_once '../templates/header.php';
+
 ?>
 
 <!DOCTYPE html>

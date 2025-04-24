@@ -21,4 +21,7 @@ class Database {
         return $this->conn;
     }
 }
+// Create database connection
+$database = new Database();
+$db = $database->getConnection();
 ?>

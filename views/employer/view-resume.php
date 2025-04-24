@@ -79,17 +79,82 @@ $application = $stmt->fetch(PDO::FETCH_ASSOC);
                     </div>
                 </div>
             <?php endif; ?>
-
             <div class="flex justify-end space-x-4 mt-6">
-                <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'shortlisted')" 
-                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                    Shortlist Candidate
-                </button>
-                <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'rejected')" 
-                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                    Reject Application
-                </button>
+                <?php if ($application['status'] === 'pending'): ?>
+                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'shortlisted')" 
+                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Shortlist Candidate
+                    </button>
+                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'rejected')" 
+                            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                        Reject Application
+                    </button>
+                <?php elseif ($application['status'] === 'shortlisted'): ?>
+                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'hired')" 
+                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Hire Candidate
+                    </button>
+                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'rejected')" 
+                            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                        Reject Application
+                    </button>
+                <?php elseif ($application['status'] === 'rejected'): ?>
+                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'shortlisted')" 
+                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Reconsider Candidate
+                    </button>
+                <?php elseif ($application['status'] === 'hired'): ?>
+                    <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded">
+                        Candidate Hired
+                    </span>
+                <?php endif; ?>
+                
+                <a href="schedule_interview.php?application_id=<?php echo $application['application_id']; ?>" 
+                   class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600">
+                   <?php 
+                   // Check if interview exists
+                   $interview_query = "SELECT interview_id FROM interviews WHERE application_id = :application_id";
+                   $interview_stmt = $db->prepare($interview_query);
+                   $interview_stmt->bindParam(":application_id", $application['application_id']);
+                   $interview_stmt->execute();
+                   
+                   echo $interview_stmt->rowCount() > 0 ? "Update Interview" : "Schedule Interview"; 
+                   ?>
+                </a>
             </div>
+
+<?php
+// Check if an interview is already scheduled
+$interview_query = "SELECT * FROM interviews WHERE application_id = :application_id";
+$interview_stmt = $db->prepare($interview_query);
+$interview_stmt->bindParam(":application_id", $application_id);
+$interview_stmt->execute();
+$interview = $interview_stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($interview): 
+?>
+<div class="mt-6 mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+    <h3 class="text-lg font-semibold text-blue-800 mb-2">Interview Scheduled</h3>
+    <div class="grid grid-cols-2 gap-4">
+        <p class="text-gray-700"><strong>Date & Time:</strong> <?php echo date('F j, Y - g:i A', strtotime($interview['interview_date'])); ?></p>
+        <p class="text-gray-700"><strong>Type:</strong> <?php echo ucfirst($interview['interview_type']); ?></p>
+        <p class="text-gray-700"><strong>Status:</strong> <?php echo ucfirst($interview['status']); ?></p>
+    </div>
+    <?php if (!empty($interview['notes'])): ?>
+    <div class="mt-2">
+        <p class="text-gray-700"><strong>Notes:</strong></p>
+        <p class="text-gray-600 mt-1"><?php echo nl2br(htmlspecialchars($interview['notes'])); ?></p>
+    </div>
+    <?php endif; ?>
+    <div class="mt-3">
+        <a href="schedule_interview.php?application_id=<?php echo $application_id; ?>" 
+           class="text-blue-600 hover:text-blue-800 font-medium">
+            Update Interview Details
+        </a>
+    </div>
+</div>
+<?php endif; ?>
+
         </div>
     </div>
 

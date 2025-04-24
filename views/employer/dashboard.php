@@ -57,31 +57,8 @@ $stmt = $db->prepare($query);
 $stmt->bindParam(":user_id", $user_id);
 $stmt->execute();
 $recent_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+include_once '../templates/header.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employer Dashboard - Smart Recruitment System</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <h1 class="text-xl font-bold text-gray-800">Employer Dashboard</h1>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="company-profile.php" class="text-gray-600 hover:text-gray-800">Company Profile</a>
-                    <a href="post-job.php" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Post New Job</a>
-                    <a href="../../includes/auth/logout.php" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Logout</a>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <div class="max-w-7xl mx-auto px-4 py-8">
         <?php if (isset($_SESSION['success'])): ?>
@@ -144,5 +121,81 @@ $recent_jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+      <!-- Add this section to the dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">Recent Messages</h2>
+            <a href="../messages/inbox.php" class="text-blue-500 hover:text-blue-700 text-sm">View All</a>
+        </div>
+        
+        <?php
+        // Get recent messages
+        $messages_query = "SELECT m.*, u.first_name, u.last_name 
+                          FROM messages m
+                          JOIN users u ON m.sender_id = u.user_id
+                          WHERE m.receiver_id = :user_id
+                          ORDER BY m.created_at DESC
+                          LIMIT 3";
+        $messages_stmt = $db->prepare($messages_query);
+        $messages_stmt->bindParam(":user_id", $user_id);
+        $messages_stmt->execute();
+        $recent_messages = $messages_stmt->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        
+        <?php if (count($recent_messages) > 0): ?>
+            <div class="space-y-4">
+                <?php foreach ($recent_messages as $message): ?>
+                    <div class="border-b pb-3 <?php echo $message['is_read'] ? '' : 'font-semibold'; ?>">
+                        <div class="flex justify-between">
+                            <span><?php echo htmlspecialchars($message['first_name'] . ' ' . $message['last_name']); ?></span>
+                            <span class="text-sm text-gray-500"><?php echo date('M j, Y', strtotime($message['created_at'])); ?></span>
+                        </div>
+                        <a href="../messages/view_message.php?id=<?php echo $message['message_id']; ?>" class="text-blue-500 hover:text-blue-700">
+                            <?php echo htmlspecialchars($message['subject'] ? $message['subject'] : '(No subject)'); ?>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p class="text-gray-500">No recent messages.</p>
+        <?php endif; ?>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">Recent Notifications</h2>
+            <a href="../notifications/index.php" class="text-blue-500 hover:text-blue-700 text-sm">View All</a>
+        </div>
+        
+        <?php
+        // Get recent notifications
+        $notifications_query = "SELECT * FROM notifications 
+                              WHERE user_id = :user_id
+                              ORDER BY created_at DESC
+                              LIMIT 3";
+        $notifications_stmt = $db->prepare($notifications_query);
+        $notifications_stmt->bindParam(":user_id", $user_id);
+        $notifications_stmt->execute();
+        $recent_notifications = $notifications_stmt->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        
+        <?php if (count($recent_notifications) > 0): ?>
+            <div class="space-y-4">
+                <?php foreach ($recent_notifications as $notification): ?>
+                    <div class="border-b pb-3 <?php echo $notification['is_read'] ? '' : 'font-semibold'; ?>">
+                        <div class="flex justify-between">
+                            <span class="font-medium"><?php echo htmlspecialchars($notification['title']); ?></span>
+                            <span class="text-sm text-gray-500"><?php echo date('M j, Y', strtotime($notification['created_at'])); ?></span>
+                        </div>
+                        <p class="text-gray-600 truncate"><?php echo htmlspecialchars($notification['message']); ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p class="text-gray-500">No recent notifications.</p>
+        <?php endif; ?>
+    </div>
+</div>
 </body>
 </html>

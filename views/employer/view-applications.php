@@ -34,27 +34,8 @@ $stmt = $db->prepare($query);
 $stmt->bindParam(":job_id", $job_id);
 $stmt->execute();
 $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+include_once '../templates/header.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Applications - Smart Recruitment System</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <h1 class="text-xl font-bold text-gray-800">Applications for <?php echo htmlspecialchars($job['title']); ?></h1>
-                </div>
-                <a href="dashboard.php" class="text-blue-500 hover:text-blue-700">Back to Dashboard</a>
-            </div>
-        </div>
-    </nav>
 
     <div class="max-w-7xl mx-auto px-4 py-8">
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
@@ -101,6 +82,7 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applied Date</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="applicationsTable">
@@ -129,12 +111,39 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             <div class="flex space-x-3">
                                                 <a href="view-resume.php?application_id=<?php echo $application['application_id']; ?>" 
                                                    class="text-blue-600 hover:text-blue-900">View Resume</a>
-                                                <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'shortlisted')" 
-                                                        class="text-green-600 hover:text-green-900">Shortlist</button>
-                                                <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'rejected')" 
-                                                        class="text-red-600 hover:text-red-900">Reject</button>
+                                                
+                                                <?php if ($application['status'] === 'pending'): ?>
+                                                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'shortlisted')" 
+                                                            class="text-green-600 hover:text-green-900">Shortlist</button>
+                                                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'rejected')" 
+                                                            class="text-red-600 hover:text-red-900">Reject</button>
+                                                <?php elseif ($application['status'] === 'shortlisted'): ?>
+                                                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'hired')" 
+                                                            class="text-green-600 hover:text-green-900">Hire</button>
+                                                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'rejected')" 
+                                                            class="text-red-600 hover:text-red-900">Reject</button>
+                                                <?php elseif ($application['status'] === 'rejected'): ?>
+                                                    <button onclick="updateStatus(<?php echo $application['application_id']; ?>, 'shortlisted')" 
+                                                            class="text-green-600 hover:text-green-900">Reconsider</button>
+                                                <?php elseif ($application['status'] === 'hired'): ?>
+                                                    <span class="text-gray-500">Hired</span>
+                                                <?php endif; ?>
+                                                
+                                                <a href="schedule_interview.php?application_id=<?php echo $application['application_id']; ?>" 
+                                                   class="text-indigo-600 hover:text-indigo-900">
+                                                   <?php 
+                                                   // Check if interview exists
+                                                   $interview_query = "SELECT interview_id FROM interviews WHERE application_id = :application_id";
+                                                   $interview_stmt = $db->prepare($interview_query);
+                                                   $interview_stmt->bindParam(":application_id", $application['application_id']);
+                                                   $interview_stmt->execute();
+                                                   
+                                                   echo $interview_stmt->rowCount() > 0 ? "Update Interview" : "Schedule Interview"; 
+                                                   ?>
+                                                </a>
                                             </div>
                                         </td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
