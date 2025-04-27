@@ -196,7 +196,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <?php echo date('M d, Y', strtotime($user['created_at'])); ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="edit_user.php?id=<?php echo $user['user_id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
                                     
                                     <?php if ($user['status'] === 'active'): ?>
                                         <a href="../../includes/admin/update_user_status.php?id=<?php echo $user['user_id']; ?>&status=blocked" 
