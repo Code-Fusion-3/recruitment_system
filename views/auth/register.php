@@ -41,9 +41,13 @@
     </style>
 </head>
 <body class="bg-image min-h-screen flex items-center justify-center py-12 px-4">
+    <?php
+    $role = isset($_GET['role']) ? $_GET['role'] : 'user';
+    $headerText = $role === 'jobseeker' ? 'Register as Job Seeker' : ($role === 'employer' ? 'Register as Employer' : 'Create Account');
+    ?>
     <div class="form-container p-8 rounded-xl shadow-2xl w-full max-w-md">
         <div class="flex justify-between items-center mb-8">
-            <h2 class="text-2xl font-bold text-primary-800">Create Account</h2>
+            <h2 class="text-2xl font-bold text-primary-800"><?php echo $headerText; ?></h2>
             <a href="../../index.php" class="text-primary-600 hover:text-primary-800 flex items-center transition-colors duration-300">
                 <i class="fas fa-arrow-left mr-2"></i> Back to Home
             </a>
