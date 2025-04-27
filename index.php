@@ -25,7 +25,7 @@ require_once 'config/database.php';
 </head>
 <body class="bg-gray-50 font-sans">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full z-10">
+    <nav class="bg-white shadow-lg fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -49,28 +49,34 @@ require_once 'config/database.php';
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section h-screen flex items-center justify-center text-white">
-        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4">
+     <!-- Hero Section -->
+    <section id="home"  class="hero-section h-96 flex items-center justify-center text-white">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1920" 
+                 alt="Recruitment Background" 
+                 class="w-full h-96 object-cover filter brightness-50">
+        </div>
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 text-shadow">
                 Smart Recruitment System
             </h1>
-            <p class="text-xl sm:text-2xl md:text-3xl mb-8">
+            <p class="text-xl sm:text-2xl md:text-3xl mb-8 text-shadow-sm">
                 Connecting talent with opportunity through intelligent matching
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="views/auth/register.php?role=jobseeker" class="bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-medium hover:bg-blue-700 transition duration-150 ease-in-out">
+                <a href="views/auth/register.php?role=jobseeker" class="bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-medium hover:bg-blue-700 transition duration-150 ease-in-out shadow-lg">
                     Find a Job
                 </a>
-                <a href="views/auth/register.php?role=employer" class="bg-white text-blue-600 px-6 py-3 rounded-md text-lg font-medium hover:bg-gray-100 transition duration-150 ease-in-out">
+                <a href="views/auth/register.php?role=employer" class="bg-white text-blue-600 px-6 py-3 rounded-md text-lg font-medium hover:bg-gray-100 transition duration-150 ease-in-out shadow-lg">
                     Post a Job
                 </a>
             </div>
         </div>
     </section>
 
+
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-white">
+    <section id="features" class="py-20 bg-white z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -83,7 +89,7 @@ require_once 'config/database.php';
 
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 <!-- Feature 1 -->
-                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card">
+                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card z-30">
                     <div class="text-blue-600 mb-4">
                         <i class="fas fa-search-dollar text-4xl"></i>
                     </div>
@@ -94,7 +100,7 @@ require_once 'config/database.php';
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card">
+                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card z-30">
                     <div class="text-blue-600 mb-4">
                         <i class="fas fa-file-alt text-4xl"></i>
                     </div>
@@ -105,7 +111,7 @@ require_once 'config/database.php';
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card">
+                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card z-30">
                     <div class="text-blue-600 mb-4">
                         <i class="fas fa-calendar-check text-4xl"></i>
                     </div>
@@ -116,7 +122,7 @@ require_once 'config/database.php';
                 </div>
 
                 <!-- Feature 4 -->
-                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card">
+                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card z-30">
                     <div class="text-blue-600 mb-4">
                         <i class="fas fa-building text-4xl"></i>
                     </div>
@@ -127,7 +133,7 @@ require_once 'config/database.php';
                 </div>
 
                 <!-- Feature 5 -->
-                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card">
+                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card z-30">
                     <div class="text-blue-600 mb-4">
                         <i class="fas fa-chart-line text-4xl"></i>
                     </div>
@@ -138,7 +144,7 @@ require_once 'config/database.php';
                 </div>
 
                 <!-- Feature 6 -->
-                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card">
+                <div class="bg-gray-50 rounded-lg p-8 shadow-md feature-card z-50">
                     <div class="text-blue-600 mb-4">
                         <i class="fas fa-bell text-4xl"></i>
                     </div>
@@ -280,7 +286,7 @@ require_once 'config/database.php';
                     <div class="md:flex items-center">
                         <div class="md:w-1/2 pr-8 md:text-right md:order-2">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Post or Find Jobs</h3>
-                            <p class="text-gray-600">
+                            <p class="text-gray-600 z-50">
                                 Employers can post job openings while job seekers can search and apply for relevant positions.
                             </p>
                         </div>
