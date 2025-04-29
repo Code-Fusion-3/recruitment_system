@@ -93,7 +93,7 @@ if (isset($_SESSION['user_id'])) {
                                 <a href="../jobseeker/interviews.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Interviews</a>
                             <?php elseif ($_SESSION['role'] === 'employer'): ?>
                                 <a href="../employer/jobs.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Jobs</a>
-                                <a href="../employer/applications.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Applications</a>
+                                <!-- <a href="../employer/applications.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Applications</a> -->
                             <?php elseif ($_SESSION['role'] === 'admin'): ?>
                                 <a href="../admin/users.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Manage Users</a>
                                 <a href="../admin/jobs.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Manage Jobs</a>
