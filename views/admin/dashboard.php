@@ -77,7 +77,7 @@ $recent_jobs = $recent_jobs_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <span class="text-gray-700">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
                     <a href="users.php" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Manage Users</a>
                     <a href="jobs.php" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Manage Jobs</a>
-                    <a href="../../includes/auth/logout.php" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Logout</a>
+                    <a href="../auth/logout.php" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Logout</a>
                 </div>
             </div>
         </div>
