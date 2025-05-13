@@ -169,7 +169,7 @@ include_once '../templates/header.php';
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <a href="job_applications.php?job_id=<?php echo $job['job_id']; ?>" class="text-blue-500 hover:text-blue-700">
+                                        <a href="view-applications.php?job_id=<?php echo $job['job_id']; ?>" class="text-blue-500 hover:text-blue-700">
                                             <?php echo $job['application_count']; ?> applications
                                         </a>
                                     </td>

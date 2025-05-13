@@ -200,7 +200,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <?php echo date('M d, Y', strtotime($job['created_at'])); ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="../jobs/detail.php?id=<?php echo $job['job_id']; ?>" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
+                                    <a href="job_details.php?id=<?php echo $job['job_id']; ?>" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
                                     
                                     <?php if ($job['status'] === 'open'): ?>
                                         <a href="../../includes/admin/update_job_status.php?id=<?php echo $job['job_id']; ?>&status=closed" 
