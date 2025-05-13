@@ -106,7 +106,7 @@ $interviews = $interviews_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <a href="dashboard.php" class="text-gray-700 hover:text-gray-900">Dashboard</a>
                     <a href="users.php" class="text-gray-700 hover:text-gray-900">Manage Users</a>
                     <a href="jobs.php" class="text-gray-700 hover:text-gray-900">Manage Jobs</a>
-                    <a href="../../includes/auth/logout.php" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Logout</a>
+                    <a href="../auth/logout.php" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Logout</a>
                 </div>
             </div>
         </div>
