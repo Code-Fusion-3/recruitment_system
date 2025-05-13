@@ -1,7 +1,9 @@
 <?php
+// error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
-require_once '../db_connection.php';
-require_once '../auth_check.php';
+require_once '../../config/database.php';
 
 if (isset($_GET['id'])) {
     $message_id = intval($_GET['id']);
