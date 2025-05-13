@@ -198,9 +198,9 @@ $interviews = $interviews_stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Status
                                     </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <!-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Actions
-                                    </th>
+                                    </th> -->
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -243,7 +243,7 @@ $interviews = $interviews_stmt->fetchAll(PDO::FETCH_ASSOC);
                                                     </a>
                                                 <?php endif; ?>
                                                 
-                                                <div class="relative inline-block text-left" x-data="{ open: false }">
+                                                <div class="hidden inline-block text-left" x-data="{ open: false }">
                                                     <button @click="open = !open" type="button" class="text-gray-700 hover:text-gray-900">
                                                         Change Status
                                                     </button>
@@ -258,7 +258,7 @@ $interviews = $interviews_stmt->fetchAll(PDO::FETCH_ASSOC);
                                                 </div>
                                                 
                                                 <a href="../../includes/admin/delete_application.php?id=<?php echo $application['application_id']; ?>&job_id=<?php echo $job_id; ?>" 
-                                                   class="text-red-600 hover:text-red-900"
+                                                   class="text-red-600 hover:text-red-900 hidden"
                                                    onclick="return confirm('Are you sure you want to delete this application?')">
                                                     Delete
                                                 </a>
