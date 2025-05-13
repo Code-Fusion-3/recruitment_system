@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once '../db_connection.php';
-require_once '../auth_check.php';
+require_once '../../config/database.php';
 
 // Check if user is an employer
 if ($_SESSION['role'] !== 'employer') {
@@ -63,6 +62,6 @@ if (isset($_GET['interview_id'])) {
     }
 }
 
-header("Location: ../../views/employer/applications.php");
+header("Location: ../../views/employer/view_applications.php");
 exit();
 ?>
