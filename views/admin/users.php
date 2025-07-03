@@ -221,11 +221,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 class="text-green-600 hover:text-green-900 mr-3">Unblock</a>
                             <?php endif; ?>
 
-                            <?php if ($user['user_id'] != $_SESSION['user_id']): ?>
-                            <a href="../../includes/admin/delete_user.php?id=<?php echo $user['user_id']; ?>"
-                                class="text-red-600 hover:text-red-900"
-                                onclick="return confirm('Are you sure you want to delete this user? This action cannot be undone.')">Delete</a>
-                            <?php endif; ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
