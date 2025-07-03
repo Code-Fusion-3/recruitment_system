@@ -73,7 +73,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="flex items-center space-x-4">
                     <a href="dashboard.php" class="text-gray-700 hover:text-gray-900">Dashboard</a>
                     <a href="jobs.php" class="text-gray-700 hover:text-gray-900">Manage Jobs</a>
-                    <a href="../../includes/auth/logout.php"
+                    <a href="../../views/auth/logout.php"
                         class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Logout</a>
                 </div>
             </div>
@@ -85,18 +85,18 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <?php if (isset($_SESSION['success'])): ?>
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6">
-            <?php 
-                    echo $_SESSION['success'];
-                    unset($_SESSION['success']);
+            <?php
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
                 ?>
         </div>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['error'])): ?>
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
-            <?php 
-                    echo $_SESSION['error'];
-                    unset($_SESSION['error']);
+            <?php
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
                 ?>
         </div>
         <?php endif; ?>
@@ -193,16 +193,16 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                        <?php echo $user['role'] === 'admin' ? 'bg-purple-100 text-purple-800' : 
-                                                ($user['role'] === 'employer' ? 'bg-blue-100 text-blue-800' : 
+                                        <?php echo $user['role'] === 'admin' ? 'bg-purple-100 text-purple-800' :
+                                            ($user['role'] === 'employer' ? 'bg-blue-100 text-blue-800' :
                                                 'bg-green-100 text-green-800'); ?>">
                                 <?php echo ucfirst($user['role']); ?>
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                        <?php echo $user['status'] === 'active' ? 'bg-green-100 text-green-800' : 
-                                                ($user['status'] === 'inactive' ? 'bg-yellow-100 text-yellow-800' : 
+                                        <?php echo $user['status'] === 'active' ? 'bg-green-100 text-green-800' :
+                                            ($user['status'] === 'inactive' ? 'bg-yellow-100 text-yellow-800' :
                                                 'bg-red-100 text-red-800'); ?>">
                                 <?php echo ucfirst($user['status']); ?>
                             </span>

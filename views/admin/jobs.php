@@ -82,7 +82,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="flex items-center space-x-4">
                     <a href="dashboard.php" class="text-gray-700 hover:text-gray-900">Dashboard</a>
                     <a href="users.php" class="text-gray-700 hover:text-gray-900">Manage Users</a>
-                    <a href="../../includes/auth/logout.php"
+                    <a href="../../views/auth/logout.php"
                         class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Logout</a>
                 </div>
             </div>
